@@ -1,0 +1,64 @@
+//SCOPING
+function testing()
+{
+  var abc=20;
+  let def=100;
+  console.log(abc);
+  //Block scope
+  if(1){
+    var xyz='block scoped';
+    console.log('Inside If',xyz);
+    console.log(abc);
+  }
+  console.log('Outside if',xyz);
+}
+var nam='cipher';
+let year=2020; //Global scope
+
+function test(){
+    console.log(nam);
+    console.log(year);
+}
+test();
+
+// testing(); // calling a function
+
+//Function declaration and function expression
+//Hoisting
+myFunc()
+myFunc2()
+
+function myFunc(){
+    console.log('Inside myFunc declaration');
+}
+
+//Function expression
+let myFunc2=function()
+{
+    console.log('Inside myFunc2: function expression');
+}
+console.log(name2);
+nam();
+
+//Functions and Function variables get hoisted ,while function expressions doesn't get hoisted
+var name2='Mrudula';
+function na(){
+  console.log('hello');
+}
+
+//Arrow Functions
+
+let newFunc = () =>{
+    console.log('Arrow functions created');
+    console.log(this);
+}
+
+newFunc();
+
+let funcExp = function(input){
+    console.log('Function expression created');
+    console.log(input);
+}
+
+let func2= param =>console.log(param);
+funcExp();
