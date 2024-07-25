@@ -1,1 +1,85 @@
+//Connection
 
+const mongoose = require("mongoose");
+
+const URL =
+  "mongodb+srv://new-user-123:new-user-123@testcluster.vyftd.mongodb.net/test?retryWrites=true&w=majority";
+
+before((done) => {
+  mongoose.connect(URL);
+  // Event driven node.js
+  // Asynchronous
+  mongoose.connection
+    .once("open", () => {
+      console.log("Connection to the Database successful");
+      done();
+    })
+    .on("error", (error) => {
+      console.log("Unable to connect", error);
+    });
+});
+
+// Drop my collections before each test
+beforeEach((done) => {
+  mongoose.connection.collections.people.drop(() => {
+    done();
+  });
+});
+
+//Deleting data
+const assert = require("assert");
+const User = require("./../models/user");
+
+describe("deleting records", () => {
+  let newUser;
+  beforeEach((done) => {
+    newUser = new User({
+      name: "Jake",
+      age: 30,
+    });
+    newUser.save().then(() => {
+      done();
+    });
+  });
+  it("it deletes one record from the db", (done) => {
+    User.findByIdAndDelete({ _id: newUser._id }).then(() => {
+      User.findById({ _id: newUser._id }).then((data) => {
+        assert(data === null);
+        done();
+      });
+    });
+  });
+});
+
+//Updating data
+const assert = require("assert");
+const User = require("./../models/user");
+
+describe("Updating records", () => {
+  let newUser;
+  beforeEach((done) => {
+    newUser = new User({
+      name: "Jon Snow",
+      age: 16,
+    });
+    newUser.save().then((data) => {
+      console.log(data);
+      done();
+    });
+  });
+
+  it("it updates one record in the db", (done) => {
+    User.findOneAndUpdate(
+      { name: "Jon Snow" },
+      { name: "Arya", age: 24 },
+      { useFindAndModify: false }
+    ).then((data) => {
+      console.log(data);
+      User.findById({ _id: newUser._id }).then((result) => {
+        console.log(result);
+        assert(result.name === "Arya");
+        done();
+      });
+    });
+  });
+});
