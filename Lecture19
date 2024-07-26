@@ -1,3 +1,40 @@
 Starting React
 DOM
 ReactCOM.render done
+//HTML
+<!-- <div class="Pizza">
+  <h1> Dad's slice</h1>
+  <p>best piza in town</p>
+  </div>
+<div class="Pizza">
+  <h1> Dad's slice</h1>
+  <p>best piza in town</p>
+  </div>
+<div class="Pizza">
+  <h1> Dad's slice</h1>
+  <p>best piza in town</p>
+  </div> -->
+<div id="root"></div>
+
+//CSS
+.Pizza{
+  border: 1px solid black;
+  width:200px;
+  padding:10px;
+  display:inline-black;
+  background: lightsalmon;
+  color: white;
+}
+
+//JS
+function Pizza() {
+  return(
+    //JSX
+  <div class='Pizza'>
+      <h1> Pizza shop</h1>
+  </div>  
+  )
+}
+//function(components) where to add on DOM
+ReactDOM.render(<Pizza />,document.getElementById('root')); //argument1=function to render,argument2=where to render
+ReactDOM.render(<Pizza />,document.getElementById('root2')); 
