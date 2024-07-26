@@ -2,3 +2,16 @@ document.createEelenet('textarea)
 ReactDOM.render('<Textarea>',
 document.getElementbyId('root))
 document.append()
+
+//USING PROPS
+function Pizza(props) {
+  return(
+    //JSX
+  <div class='Pizza'>
+      <h1> {props.name}</h1>
+  </div>  
+  )
+}
+//function(components) where to add on DOM
+ReactDOM.render(<Pizza name="Pizzahut" />,document.getElementById('root')); //argument1=function to render,argument2=where to render
+ReactDOM.render(<Pizza name="Dominos"/>,document.getElementById('root2')); 
